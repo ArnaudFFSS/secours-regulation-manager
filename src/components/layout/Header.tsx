@@ -51,7 +51,7 @@ export function Header({ toggleSidebar }: HeaderProps) {
             <Menu className="h-5 w-5" />
           </Button>
           <div className="flex items-center">
-            <span className="font-bold text-xl text-emergency-700">Secours Régulation</span>
+            <span className="font-bold text-xl text-emergency-700">SI-DPS FFSS Strasbourg OUEST</span>
           </div>
         </div>
         

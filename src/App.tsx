@@ -14,6 +14,7 @@ import MapPage from "./pages/MapPage";
 import InterventionsPage from "./pages/InterventionsPage";
 import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
+import DPSPage from "./pages/DPSPage";
 
 // Layout components
 import { Header } from "./components/layout/Header";
@@ -82,6 +83,14 @@ const App = () => (
               element={
                 <ProtectedLayout>
                   <InterventionsPage />
+                </ProtectedLayout>
+              }
+            />
+            <Route
+              path="/dps"
+              element={
+                <ProtectedLayout>
+                  <DPSPage />
                 </ProtectedLayout>
               }
             />
