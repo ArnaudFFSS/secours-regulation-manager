@@ -17,7 +17,7 @@ import {
   MessageSquare,
   AlertTriangle,
   Stethoscope,
-  BuildingHospital,
+  Building,
   Car,
   ClipboardList,
   UserCircle
@@ -111,7 +111,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <p className="text-xs font-medium text-gray-500 px-3 mb-2">Gestion des ressources</p>
               <NavItem to="/teams" icon={<Users className="h-5 w-5" />} label="Équipes" />
               <NavItem to="/vehicles" icon={<Car className="h-5 w-5" />} label="Véhicules" />
-              <NavItem to="/medical-equipment" icon={<BuildingHospital className="h-5 w-5" />} label="Matériel médical" />
+              <NavItem to="/medical-equipment" icon={<Building className="h-5 w-5" />} label="Matériel médical" />
               <NavItem to="/reports" icon={<FileText className="h-5 w-5" />} label="Rapports" />
               <NavItem to="/stats" icon={<BarChart4 className="h-5 w-5" />} label="Statistiques" />
             </div>
