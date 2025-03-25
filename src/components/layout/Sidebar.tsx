@@ -14,7 +14,13 @@ import {
   ChevronLeft,
   Calendar,
   Headphones,
-  MessageSquare
+  MessageSquare,
+  AlertTriangle,
+  Stethoscope,
+  BuildingHospital,
+  Car,
+  ClipboardList,
+  UserCircle
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -29,22 +35,30 @@ interface NavItemProps {
   icon: React.ReactNode;
   label: string;
   isActive?: boolean;
+  badge?: string | number;
 }
 
-const NavItem = ({ to, icon, label, isActive }: NavItemProps) => (
+const NavItem = ({ to, icon, label, badge }: NavItemProps) => (
   <NavLink 
     to={to} 
     className={({ isActive }) => cn(
-      "flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200",
+      "flex items-center justify-between gap-3 px-3 py-2 rounded-lg transition-all duration-200",
       "hover:bg-emergency-50 dark:hover:bg-emergency-950/50",
       isActive ? "bg-emergency-100 text-emergency-700 dark:bg-emergency-900 dark:text-emergency-100 font-medium" : "text-gray-600 dark:text-gray-400"
     )}
     end
   >
-    <div className="flex items-center justify-center w-6 h-6">
-      {icon}
+    <div className="flex items-center gap-3">
+      <div className="flex items-center justify-center w-6 h-6">
+        {icon}
+      </div>
+      <span>{label}</span>
     </div>
-    <span>{label}</span>
+    {badge && (
+      <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-emergency-600 text-white">
+        {badge}
+      </span>
+    )}
   </NavLink>
 );
 
@@ -84,18 +98,28 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         
         <ScrollArea className="flex-1 px-3 py-4">
           <nav className="space-y-1.5">
-            <NavItem to="/" icon={<LayoutDashboard className="h-5 w-5" />} label="Tableau de bord" />
+            <NavItem to="/dashboard" icon={<LayoutDashboard className="h-5 w-5" />} label="Tableau de bord" badge="3" />
             <NavItem to="/map" icon={<Map className="h-5 w-5" />} label="Carte SITAC" />
             <NavItem to="/dps" icon={<Calendar className="h-5 w-5" />} label="Gestion DPS" />
-            <NavItem to="/interventions" icon={<Ambulance className="h-5 w-5" />} label="Interventions" />
-            <NavItem to="/victims" icon={<Users className="h-5 w-5" />} label="Victimes" />
-            <NavItem to="/reports" icon={<FileText className="h-5 w-5" />} label="Rapports" />
-            <NavItem to="/stats" icon={<BarChart4 className="h-5 w-5" />} label="Statistiques" />
-            <NavItem to="/phone" icon={<Headphones className="h-5 w-5" />} label="Téléphonie PBX" />
-            <NavItem to="/maincourante" icon={<MessageSquare className="h-5 w-5" />} label="Main Courante" />
+            <NavItem to="/interventions" icon={<Ambulance className="h-5 w-5" />} label="Interventions" badge="5" />
+            <NavItem to="/telephonie" icon={<Headphones className="h-5 w-5" />} label="Téléphonie PBX" />
+            <NavItem to="/main-courante" icon={<MessageSquare className="h-5 w-5" />} label="Main Courante" />
+            <NavItem to="/crise" icon={<AlertTriangle className="h-5 w-5" />} label="Gestion de crise" />
+            <NavItem to="/regulation" icon={<Stethoscope className="h-5 w-5" />} label="Régulation médicale" />
+            
+            <div className="pt-4 mt-4 border-t">
+              <p className="text-xs font-medium text-gray-500 px-3 mb-2">Gestion des ressources</p>
+              <NavItem to="/teams" icon={<Users className="h-5 w-5" />} label="Équipes" />
+              <NavItem to="/vehicles" icon={<Car className="h-5 w-5" />} label="Véhicules" />
+              <NavItem to="/medical-equipment" icon={<BuildingHospital className="h-5 w-5" />} label="Matériel médical" />
+              <NavItem to="/reports" icon={<FileText className="h-5 w-5" />} label="Rapports" />
+              <NavItem to="/stats" icon={<BarChart4 className="h-5 w-5" />} label="Statistiques" />
+            </div>
             
             <div className="pt-4 mt-4 border-t">
               <p className="text-xs font-medium text-gray-500 px-3 mb-2">Administration</p>
+              <NavItem to="/profile" icon={<UserCircle className="h-5 w-5" />} label="Mon profil" />
+              <NavItem to="/tasks" icon={<ClipboardList className="h-5 w-5" />} label="Tâches" badge="2" />
               <NavItem to="/settings" icon={<Settings className="h-5 w-5" />} label="Paramètres" />
               <NavItem to="/help" icon={<HelpCircle className="h-5 w-5" />} label="Aide" />
             </div>

@@ -160,3 +160,40 @@ html {
 .status-critical::after {
   @apply bg-alert-critical;
 }
+
+/* Responsive adaptations */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+}
+
+/* Mode sombre/clair transition */
+* {
+  @apply transition-colors duration-200;
+}
+
+/* Améliorations d'accessibilité */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary;
+}
+
+/* Adaptations pour tablettes */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    @apply px-6;
+  }
+}
+
+/* Animations pour listes */
+.list-animation > * {
+  @apply animate-fade-in;
+  animation-fill-mode: both;
+}
+
+.list-animation > *:nth-child(1) { animation-delay: 0.1s; }
+.list-animation > *:nth-child(2) { animation-delay: 0.2s; }
+.list-animation > *:nth-child(3) { animation-delay: 0.3s; }
+.list-animation > *:nth-child(4) { animation-delay: 0.4s; }
+.list-animation > *:nth-child(5) { animation-delay: 0.5s; }
+.list-animation > *:nth-child(6) { animation-delay: 0.6s; }

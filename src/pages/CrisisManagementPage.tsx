@@ -7,8 +7,10 @@ const CrisisManagementPage = () => {
   return (
     <PageTransition>
       <div className="container py-6">
-        <h1 className="text-3xl font-bold mb-2">Gestion de Crise</h1>
-        <p className="text-muted-foreground mb-6">Coordonnez vos ressources et gérez les situations d'urgence</p>
+        <div className="flex flex-col space-y-2 mb-6">
+          <h1 className="text-3xl font-bold">Gestion de Crise</h1>
+          <p className="text-muted-foreground">Coordonnez vos ressources et gérez les situations d'urgence</p>
+        </div>
         <CrisisManagement />
       </div>
     </PageTransition>

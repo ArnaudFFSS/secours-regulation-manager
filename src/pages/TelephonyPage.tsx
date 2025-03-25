@@ -7,8 +7,10 @@ const TelephonyPage = () => {
   return (
     <PageTransition>
       <div className="container py-6">
-        <h1 className="text-3xl font-bold mb-2">Téléphonie</h1>
-        <p className="text-muted-foreground mb-6">Gestion des appels et création d'interventions</p>
+        <div className="flex flex-col space-y-2 mb-6">
+          <h1 className="text-3xl font-bold">Téléphonie</h1>
+          <p className="text-muted-foreground">Gestion des appels et création d'interventions</p>
+        </div>
         <Telephony />
       </div>
     </PageTransition>

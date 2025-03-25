@@ -2,7 +2,7 @@
 import React from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
-import { Bell, Settings, Menu } from 'lucide-react';
+import { Bell, Settings, Menu, Moon, Sun } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -13,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useTheme } from '@/hooks/use-theme';
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -21,6 +22,7 @@ interface HeaderProps {
 export function Header({ toggleSidebar }: HeaderProps) {
   const { user, logout } = useAuth();
   const { toast } = useToast();
+  const { theme, setTheme } = useTheme();
   
   const handleLogout = () => {
     logout();
@@ -56,6 +58,15 @@ export function Header({ toggleSidebar }: HeaderProps) {
         </div>
         
         <div className="flex items-center space-x-2">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            aria-label="Basculer thème"
+          >
+            {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </Button>
+          
           <Button variant="ghost" size="icon" className="relative">
             <Bell className="h-5 w-5" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-alert-high rounded-full"></span>

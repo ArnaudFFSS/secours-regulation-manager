@@ -7,8 +7,10 @@ const DPSPage = () => {
   return (
     <PageTransition>
       <div className="container py-6">
-        <h1 className="text-3xl font-bold mb-2">Gestion des DPS</h1>
-        <p className="text-muted-foreground mb-6">Créez, gérez et suivez les dispositifs prévisionnels de secours</p>
+        <div className="flex flex-col space-y-2 mb-6">
+          <h1 className="text-3xl font-bold">Gestion des DPS</h1>
+          <p className="text-muted-foreground">Créez, gérez et suivez les dispositifs prévisionnels de secours</p>
+        </div>
         <DPSManagement />
       </div>
     </PageTransition>

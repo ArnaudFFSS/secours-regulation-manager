@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { PhoneCall, PhoneIncoming, PhoneOutgoing, PhoneMissed, Clock, User, Plus, Phone, Save, Play, Stop, Pause } from 'lucide-react';
+import { PhoneCall, PhoneIncoming, PhoneOutgoing, PhoneMissed, Clock, User, Plus, Phone, Save, Play, Square, Pause } from 'lucide-react';
 import { CallList } from './CallList';
 import { NewCallDialog } from './NewCallDialog';
 import { CallRecord } from '@/types';
@@ -44,7 +44,7 @@ export function Telephony() {
       <div className="flex justify-between items-center">
         <Tabs defaultValue="calls" className="w-full">
           <div className="flex justify-between items-center mb-4">
-            <TabsList>
+            <TabsList className="bg-card">
               <TabsTrigger value="calls">Appels</TabsTrigger>
               <TabsTrigger value="history">Historique</TabsTrigger>
               <TabsTrigger value="settings">Paramètres</TabsTrigger>
@@ -107,7 +107,7 @@ export function Telephony() {
                   Créer intervention
                 </Button>
                 <Button variant="destructive" onClick={endCall}>
-                  <Stop className="h-4 w-4 mr-2" />
+                  <Square className="h-4 w-4 mr-2" />
                   Terminer
                 </Button>
               </CardFooter>
