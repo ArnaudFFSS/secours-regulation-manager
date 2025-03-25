@@ -151,7 +151,7 @@ const Index = () => {
               Découvrez comment notre plateforme peut vous aider à gérer efficacement vos dispositifs de secours.
             </p>
             <Button asChild size="lg" className="hover-scale">
-              <Link to="/dashboard">
+              <Link to="/home">
                 Commencer maintenant <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
