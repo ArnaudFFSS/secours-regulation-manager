@@ -9,6 +9,7 @@ import { AuthProvider, useAuth } from "@/context/AuthContext";
 import { AnimatePresence } from "framer-motion";
 
 // Pages
+import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
 import MapPage from "./pages/MapPage";
 import InterventionsPage from "./pages/InterventionsPage";
@@ -66,6 +67,14 @@ const App = () => (
               path="/"
               element={
                 <ProtectedLayout>
+                  <HomePage />
+                </ProtectedLayout>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedLayout>
                   <DashboardPage />
                 </ProtectedLayout>
               }
@@ -91,6 +100,32 @@ const App = () => (
               element={
                 <ProtectedLayout>
                   <DPSPage />
+                </ProtectedLayout>
+              }
+            />
+            
+            {/* Routes à implémenter plus tard */}
+            <Route
+              path="/telephonie"
+              element={
+                <ProtectedLayout>
+                  <NotFound />
+                </ProtectedLayout>
+              }
+            />
+            <Route
+              path="/ressources"
+              element={
+                <ProtectedLayout>
+                  <NotFound />
+                </ProtectedLayout>
+              }
+            />
+            <Route
+              path="/main-courante"
+              element={
+                <ProtectedLayout>
+                  <NotFound />
                 </ProtectedLayout>
               }
             />

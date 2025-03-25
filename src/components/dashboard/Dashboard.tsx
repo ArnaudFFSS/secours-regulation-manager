@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ActivitySquare, Ambulance, Users, AlertTriangle } from 'lucide-react';
+import { ActivitySquare, Ambulance, Users, AlertTriangle, Calendar, Clipboard } from 'lucide-react';
 import { DashboardStats } from '@/types';
 import { cn } from '@/lib/utils';
 
@@ -10,7 +9,9 @@ const mockStats: DashboardStats = {
   activeInterventions: 12,
   availableResources: 8,
   completedToday: 24,
-  criticalCases: 3
+  criticalCases: 3,
+  upcomingDPS: 5,
+  activeDPS: 2
 };
 
 interface StatsCardProps {
@@ -229,6 +230,57 @@ const AlertsCard = () => {
   );
 };
 
+const UpcomingDPSCard = () => {
+  const upcomingDPS = [
+    { 
+      id: 1, 
+      name: "Tournoi sportif inter-universitaire", 
+      date: "15 juin 2023",
+      location: "Campus Central" 
+    },
+    { 
+      id: 2, 
+      name: "Concert au Zénith", 
+      date: "24 juin 2023",
+      location: "Zénith de Strasbourg" 
+    },
+    { 
+      id: 3, 
+      name: "Course de bienfaisance", 
+      date: "30 juin 2023",
+      location: "Parc de l'Orangerie" 
+    },
+  ];
+  
+  return (
+    <Card className="hover-scale transition-all h-[400px]">
+      <CardHeader>
+        <CardTitle>DPS à venir</CardTitle>
+        <CardDescription>Prochains dispositifs prévisionnels</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          {upcomingDPS.map(dps => (
+            <div key={dps.id} className="flex flex-col p-3 rounded-lg hover:bg-gray-50 transition-colors">
+              <h4 className="text-sm font-semibold">{dps.name}</h4>
+              <div className="flex justify-between items-center mt-1">
+                <p className="text-xs text-muted-foreground flex items-center">
+                  <Calendar className="h-3 w-3 mr-1" />
+                  {dps.date}
+                </p>
+                <p className="text-xs text-muted-foreground flex items-center">
+                  <Clipboard className="h-3 w-3 mr-1" />
+                  {dps.location}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
 export function Dashboard() {
   const stats = mockStats;
   
@@ -250,11 +302,11 @@ export function Dashboard() {
           trend={{ value: 3, label: "équipes hors service", positive: false }}
         />
         <StatsCard 
-          title="Interventions terminées"
-          value={stats.completedToday}
-          description="Aujourd'hui"
+          title="DPS en cours"
+          value={stats.activeDPS}
+          description="Actuellement déployés"
           icon={<Users className="h-6 w-6 text-emergency-500" />}
-          trend={{ value: 8, label: "de plus qu'hier", positive: true }}
+          trend={{ value: 1, label: "de plus qu'hier", positive: true }}
         />
         <StatsCard 
           title="Cas critiques"
@@ -270,6 +322,10 @@ export function Dashboard() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <RecentActivityCard />
         <ResourceStatusCard />
+        <UpcomingDPSCard />
+      </div>
+      
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <AlertsCard />
       </div>
     </div>
