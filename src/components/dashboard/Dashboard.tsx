@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ActivitySquare, Ambulance, Users, AlertTriangle } from 'lucide-react';
 import { DashboardStats } from '@/types';
+import { cn } from '@/lib/utils';
 
 // Mock data for demonstration
 const mockStats: DashboardStats = {
@@ -11,53 +12,6 @@ const mockStats: DashboardStats = {
   completedToday: 24,
   criticalCases: 3
 };
-
-export function Dashboard() {
-  const stats = mockStats;
-  
-  return (
-    <div className="space-y-6">
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <StatsCard 
-          title="Interventions actives"
-          value={stats.activeInterventions}
-          description="En cours actuellement"
-          icon={<ActivitySquare className="h-6 w-6 text-emergency-500" />}
-          trend={{ value: 12, label: 'depuis hier', positive: true }}
-        />
-        <StatsCard 
-          title="Ressources disponibles"
-          value={stats.availableResources}
-          description="Véhicules et équipes"
-          icon={<Ambulance className="h-6 w-6 text-emergency-500" />}
-          trend={{ value: 3, label: 'équipes hors service', positive: false }}
-        />
-        <StatsCard 
-          title="Interventions terminées"
-          value={stats.completedToday}
-          description="Aujourd'hui"
-          icon={<Users className="h-6 w-6 text-emergency-500" />}
-          trend={{ value: 8, label: 'de plus qu'hier', positive: true }}
-        />
-        <StatsCard 
-          title="Cas critiques"
-          value={stats.criticalCases}
-          description="Nécessitant une attention immédiate"
-          icon={<AlertTriangle className="h-6 w-6 text-alert-high" />}
-          className="border-alert-high/20 bg-alert-high/5"
-          valueClassName="text-alert-high"
-          iconClassName="bg-alert-high/10 text-alert-high"
-        />
-      </div>
-      
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <RecentActivityCard />
-        <ResourceStatusCard />
-        <AlertsCard />
-      </div>
-    </div>
-  );
-}
 
 interface StatsCardProps {
   title: string;
@@ -194,7 +148,7 @@ const ResourceStatusCard = () => {
                   "status-indicator",
                   resource.status === "available" && "status-available",
                   resource.status === "busy" && "status-busy",
-                  resource.status === "emergency" && "status-emergency",
+                  resource.status === "emergency" && "status-emergency"
                 )} />
                 <span className="text-xs capitalize">
                   {resource.status === "available" ? "Disponible" :
@@ -275,4 +229,49 @@ const AlertsCard = () => {
   );
 };
 
-import { cn } from '@/lib/utils';
+export function Dashboard() {
+  const stats = mockStats;
+  
+  return (
+    <div className="space-y-6">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <StatsCard 
+          title="Interventions actives"
+          value={stats.activeInterventions}
+          description="En cours actuellement"
+          icon={<ActivitySquare className="h-6 w-6 text-emergency-500" />}
+          trend={{ value: 12, label: "depuis hier", positive: true }}
+        />
+        <StatsCard 
+          title="Ressources disponibles"
+          value={stats.availableResources}
+          description="Véhicules et équipes"
+          icon={<Ambulance className="h-6 w-6 text-emergency-500" />}
+          trend={{ value: 3, label: "équipes hors service", positive: false }}
+        />
+        <StatsCard 
+          title="Interventions terminées"
+          value={stats.completedToday}
+          description="Aujourd'hui"
+          icon={<Users className="h-6 w-6 text-emergency-500" />}
+          trend={{ value: 8, label: "de plus qu'hier", positive: true }}
+        />
+        <StatsCard 
+          title="Cas critiques"
+          value={stats.criticalCases}
+          description="Nécessitant une attention immédiate"
+          icon={<AlertTriangle className="h-6 w-6 text-alert-high" />}
+          className="border-alert-high/20 bg-alert-high/5"
+          valueClassName="text-alert-high"
+          iconClassName="bg-alert-high/10 text-alert-high"
+        />
+      </div>
+      
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <RecentActivityCard />
+        <ResourceStatusCard />
+        <AlertsCard />
+      </div>
+    </div>
+  );
+}
