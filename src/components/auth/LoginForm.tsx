@@ -61,7 +61,7 @@ export function LoginForm() {
       transition={{ duration: 0.5 }}
       className="w-full max-w-md mx-auto"
     >
-      <Card className="w-full glass-card border-opacity-30 shadow-2xl">
+      <Card className="w-full bg-white/90 dark:bg-navy-800/60 backdrop-blur-md border border-white/20 dark:border-navy-500/20 shadow-xl">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center">Connexion</CardTitle>
           <CardDescription className="text-center">
