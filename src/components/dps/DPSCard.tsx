@@ -2,18 +2,22 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, MapPin, Users, FileText, AlertTriangle } from 'lucide-react';
+import { Calendar, MapPin, Users, FileText, AlertTriangle, Timer, Clipboard } from 'lucide-react';
 import { DPS } from '@/types';
 import { Button } from '@/components/ui/button';
 import { format, parseISO } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 interface DPSCardProps {
   dps: DPS;
 }
 
 export function DPSCard({ dps }: DPSCardProps) {
+  const navigate = useNavigate();
+  
   // Fonction pour formater les dates
   const formatDate = (dateString: string, formatStr: string = 'PPP') => {
     try {
@@ -82,12 +86,27 @@ export function DPSCard({ dps }: DPSCardProps) {
         return risk;
     }
   };
+
+  const handleActivate = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    toast.success(`DPS "${dps.name}" activé`, {
+      description: "Le DPS est maintenant en cours."
+    });
+  };
+
+  const handleViewDetails = () => {
+    navigate(`/dps/${dps.id}`);
+  };
   
   return (
-    <Card className="hover-scale transition-all overflow-hidden h-full flex flex-col">
+    <Card 
+      className="hover:shadow-md transition-all overflow-hidden h-full flex flex-col cursor-pointer border-l-4 dark:bg-navy-800"
+      style={{ borderLeftColor: dps.status === 'inProgress' ? '#10b981' : '#e5e7eb' }}
+      onClick={handleViewDetails}
+    >
       <CardHeader className="pb-3">
         <div className="flex justify-between items-start">
-          <CardTitle className="text-lg">{dps.name}</CardTitle>
+          <CardTitle className="text-lg text-navy-700 dark:text-white">{dps.name}</CardTitle>
           <Badge variant="outline" className={cn("ml-2", getStatusColor(dps.status))}>
             {getStatusLabel(dps.status)}
           </Badge>
@@ -98,7 +117,7 @@ export function DPSCard({ dps }: DPSCardProps) {
       <CardContent className="flex-grow">
         <div className="space-y-3">
           <div className="flex items-start gap-2">
-            <Calendar className="h-4 w-4 mt-0.5 text-muted-foreground" />
+            <Calendar className="h-4 w-4 mt-0.5 text-navy-600" />
             <div>
               <p className="text-sm">
                 {formatDate(dps.startDate, 'P')} - {formatDate(dps.endDate, 'P')}
@@ -110,7 +129,7 @@ export function DPSCard({ dps }: DPSCardProps) {
           </div>
           
           <div className="flex items-start gap-2">
-            <MapPin className="h-4 w-4 mt-0.5 text-muted-foreground" />
+            <MapPin className="h-4 w-4 mt-0.5 text-navy-600" />
             <div>
               <p className="text-sm">{dps.location.address}</p>
               <p className="text-xs text-muted-foreground">
@@ -120,7 +139,7 @@ export function DPSCard({ dps }: DPSCardProps) {
           </div>
           
           <div className="flex items-start gap-2">
-            <Users className="h-4 w-4 mt-0.5 text-muted-foreground" />
+            <Users className="h-4 w-4 mt-0.5 text-navy-600" />
             <div>
               <p className="text-sm">
                 {dps.expectedAttendees} participants estimés
@@ -132,7 +151,7 @@ export function DPSCard({ dps }: DPSCardProps) {
           </div>
           
           <div className="flex items-start gap-2">
-            <AlertTriangle className="h-4 w-4 mt-0.5 text-muted-foreground" />
+            <AlertTriangle className="h-4 w-4 mt-0.5 text-navy-600" />
             <div>
               <Badge variant="outline" className={cn(getRiskColor(dps.riskAssessment))}>
                 {getRiskLabel(dps.riskAssessment)}
@@ -142,15 +161,53 @@ export function DPSCard({ dps }: DPSCardProps) {
           
           {dps.documents.length > 0 && (
             <div className="flex items-start gap-2">
-              <FileText className="h-4 w-4 mt-0.5 text-muted-foreground" />
+              <FileText className="h-4 w-4 mt-0.5 text-navy-600" />
               <p className="text-sm">{dps.documents.length} document(s)</p>
+            </div>
+          )}
+
+          {dps.status === 'inProgress' && (
+            <div className="flex items-start gap-2">
+              <Timer className="h-4 w-4 mt-0.5 text-green-600" />
+              <div>
+                <p className="text-sm font-medium text-green-600">DPS en cours</p>
+                <p className="text-xs text-muted-foreground">
+                  Depuis {formatDate(dps.logs.find(log => log.message.includes('Début du DPS'))?.timestamp || dps.startDate, 'HH:mm')}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {dps.status === 'inProgress' && dps.interventions.length > 0 && (
+            <div className="flex items-start gap-2">
+              <Clipboard className="h-4 w-4 mt-0.5 text-navy-600" />
+              <div>
+                <p className="text-sm">{dps.interventions.length} intervention(s)</p>
+              </div>
             </div>
           )}
         </div>
       </CardContent>
       
       <CardFooter className="pt-2">
-        <Button variant="default" className="w-full">Voir les détails</Button>
+        {dps.status === 'planned' ? (
+          <Button 
+            variant="default" 
+            className="w-full bg-emergency-600 hover:bg-emergency-700"
+            onClick={handleActivate}
+          >
+            Activer le DPS
+          </Button>
+        ) : dps.status === 'inProgress' ? (
+          <Button 
+            variant="outline" 
+            className="w-full border-emergency-600 text-emergency-700 hover:bg-emergency-50"
+          >
+            Gérer
+          </Button>
+        ) : (
+          <Button variant="outline" className="w-full">Voir les détails</Button>
+        )}
       </CardFooter>
     </Card>
   );

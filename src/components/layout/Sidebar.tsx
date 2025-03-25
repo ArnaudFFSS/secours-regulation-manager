@@ -43,8 +43,8 @@ const NavItem = ({ to, icon, label, badge }: NavItemProps) => (
     to={to} 
     className={({ isActive }) => cn(
       "flex items-center justify-between gap-3 px-3 py-2 rounded-lg transition-all duration-200",
-      "hover:bg-emergency-50 dark:hover:bg-emergency-950/50",
-      isActive ? "bg-emergency-100 text-emergency-700 dark:bg-emergency-900 dark:text-emergency-100 font-medium" : "text-gray-600 dark:text-gray-400"
+      "hover:bg-navy-50 dark:hover:bg-navy-800/50",
+      isActive ? "bg-navy-100 text-navy-700 dark:bg-navy-800 dark:text-white font-medium" : "text-gray-600 dark:text-gray-400"
     )}
     end
   >
@@ -55,7 +55,7 @@ const NavItem = ({ to, icon, label, badge }: NavItemProps) => (
       <span>{label}</span>
     </div>
     {badge && (
-      <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-emergency-600 text-white">
+      <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-navy-600 text-white">
         {badge}
       </span>
     )}
@@ -75,14 +75,14 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       
       <aside 
         className={cn(
-          "fixed top-0 left-0 z-50 h-full w-64 flex flex-col bg-white dark:bg-gray-950 shadow-lg transition-transform duration-300 ease-in-out",
-          "lg:translate-x-0 lg:z-0 lg:shadow-none lg:border-r lg:static",
+          "fixed top-0 left-0 z-50 h-full w-64 flex flex-col bg-white dark:bg-navy-950 shadow-lg transition-transform duration-300 ease-in-out",
+          "lg:translate-x-0 lg:z-0 lg:shadow-none lg:border-r lg:static border-r-navy-200 dark:border-r-navy-800",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex items-center justify-between h-16 px-4 border-b">
+        <div className="flex items-center justify-between h-16 px-4 border-b border-b-navy-200 dark:border-b-navy-800">
           <div className="flex items-center">
-            <span className="font-bold text-xl text-emergency-700">
+            <span className="font-bold text-xl text-navy-700 dark:text-white">
               SI-DPS FFSS
             </span>
           </div>
@@ -107,7 +107,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             <NavItem to="/crise" icon={<AlertTriangle className="h-5 w-5" />} label="Gestion de crise" />
             <NavItem to="/regulation" icon={<Stethoscope className="h-5 w-5" />} label="Régulation médicale" />
             
-            <div className="pt-4 mt-4 border-t">
+            <div className="pt-4 mt-4 border-t border-t-navy-200 dark:border-t-navy-800">
               <p className="text-xs font-medium text-gray-500 px-3 mb-2">Gestion des ressources</p>
               <NavItem to="/teams" icon={<Users className="h-5 w-5" />} label="Équipes" />
               <NavItem to="/vehicles" icon={<Car className="h-5 w-5" />} label="Véhicules" />
@@ -116,7 +116,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <NavItem to="/stats" icon={<BarChart4 className="h-5 w-5" />} label="Statistiques" />
             </div>
             
-            <div className="pt-4 mt-4 border-t">
+            <div className="pt-4 mt-4 border-t border-t-navy-200 dark:border-t-navy-800">
               <p className="text-xs font-medium text-gray-500 px-3 mb-2">Administration</p>
               <NavItem to="/profile" icon={<UserCircle className="h-5 w-5" />} label="Mon profil" />
               <NavItem to="/tasks" icon={<ClipboardList className="h-5 w-5" />} label="Tâches" badge="2" />
@@ -126,7 +126,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           </nav>
         </ScrollArea>
         
-        <div className="p-4 border-t">
+        <div className="p-4 border-t border-t-navy-200 dark:border-t-navy-800">
           <div className="px-3 py-2 text-xs text-gray-500">
             <p>Version 1.0.0</p>
             <p>© {new Date().getFullYear()} FFSS Strasbourg OUEST</p>

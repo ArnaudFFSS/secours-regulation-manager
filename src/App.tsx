@@ -16,6 +16,7 @@ import InterventionsPage from "./pages/InterventionsPage";
 import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
 import DPSPage from "./pages/DPSPage";
+import DPSDetailPage from "./pages/DPSDetailPage";
 import CrisisManagementPage from "./pages/CrisisManagementPage";
 import TelephonyPage from "./pages/TelephonyPage";
 import MedicalRegulationPage from "./pages/MedicalRegulationPage";
@@ -42,11 +43,11 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   }
   
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-navy-900">
       <Header toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto bg-gray-50 dark:bg-navy-900">
           <AnimatePresence mode="wait">
             {children}
           </AnimatePresence>
@@ -104,6 +105,14 @@ const App = () => (
               element={
                 <ProtectedLayout>
                   <DPSPage />
+                </ProtectedLayout>
+              }
+            />
+            <Route
+              path="/dps/:id"
+              element={
+                <ProtectedLayout>
+                  <DPSDetailPage />
                 </ProtectedLayout>
               }
             />
