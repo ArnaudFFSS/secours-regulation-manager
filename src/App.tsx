@@ -16,6 +16,10 @@ import InterventionsPage from "./pages/InterventionsPage";
 import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
 import DPSPage from "./pages/DPSPage";
+import CrisisManagementPage from "./pages/CrisisManagementPage";
+import TelephonyPage from "./pages/TelephonyPage";
+import MedicalRegulationPage from "./pages/MedicalRegulationPage";
+import MainCourantePage from "./pages/MainCourantePage";
 
 // Layout components
 import { Header } from "./components/layout/Header";
@@ -103,21 +107,27 @@ const App = () => (
                 </ProtectedLayout>
               }
             />
-            
-            {/* Routes à implémenter plus tard */}
             <Route
-              path="/telephonie"
+              path="/crise"
               element={
                 <ProtectedLayout>
-                  <NotFound />
+                  <CrisisManagementPage />
                 </ProtectedLayout>
               }
             />
             <Route
-              path="/ressources"
+              path="/telephonie"
               element={
                 <ProtectedLayout>
-                  <NotFound />
+                  <TelephonyPage />
+                </ProtectedLayout>
+              }
+            />
+            <Route
+              path="/regulation"
+              element={
+                <ProtectedLayout>
+                  <MedicalRegulationPage />
                 </ProtectedLayout>
               }
             />
@@ -125,7 +135,7 @@ const App = () => (
               path="/main-courante"
               element={
                 <ProtectedLayout>
-                  <NotFound />
+                  <MainCourantePage />
                 </ProtectedLayout>
               }
             />
