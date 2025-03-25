@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { DPS, DPSLog } from '@/types';
 import { format, parseISO } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { Info, Clock, AlertTriangle, Check, FileText, UserCheck, Ambulance, MessageSquare } from 'lucide-react';
+import { Info, Clock, AlertTriangle, Check, FileText, UserCheck, Ambulance, MessageSquare, Square } from 'lucide-react';
 
 interface DPSTimelineProps {
   dps: DPS;
@@ -44,7 +44,7 @@ export function DPSTimeline({ dps }: DPSTimelineProps) {
       return <Play className="h-4 w-4" />;
     }
     if (message.includes('Fin du DPS')) {
-      return <Stop className="h-4 w-4" />;
+      return <Square className="h-4 w-4" />;
     }
     if (message.includes('personnel') || message.includes('Personnel')) {
       return <UserCheck className="h-4 w-4" />;
@@ -103,12 +103,6 @@ export function DPSTimeline({ dps }: DPSTimelineProps) {
   const Play = ({ className }: { className?: string }) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
       <polygon points="5 3 19 12 5 21 5 3" />
-    </svg>
-  );
-  
-  const Stop = ({ className }: { className?: string }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <rect x="6" y="6" width="12" height="12" />
     </svg>
   );
   

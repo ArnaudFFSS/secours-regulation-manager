@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { PageTransition } from '@/components/layout/PageTransition';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Users, MapPin, Phone, Mail, User, AlertTriangle, Clipboard, ArrowLeft, Play, Stop } from 'lucide-react';
+import { Calendar, Users, MapPin, Phone, Mail, User, AlertTriangle, Clipboard, ArrowLeft, Play, Square, FileText } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { format, parseISO } from 'date-fns';
 import { fr } from 'date-fns/locale';
@@ -16,7 +15,6 @@ import { DPSTimeline } from '@/components/dps/DPSTimeline';
 import { DPSMap } from '@/components/dps/DPSMap';
 import { DPS } from '@/types';
 
-// Données fictives pour la démonstration
 const mockDPS: Record<string, DPS> = {
   '1': {
     id: '1',
@@ -357,7 +355,7 @@ const DPSDetailPage = () => {
                 onClick={handleDeactivate}
                 className="border-emergency-600 text-emergency-700 hover:bg-emergency-50"
               >
-                <Stop className="h-4 w-4 mr-2" />
+                <Square className="h-4 w-4 mr-2" />
                 Terminer le DPS
               </Button>
             )}
