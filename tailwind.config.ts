@@ -165,4 +165,14 @@ export default {
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
+	safelist: [
+		{
+			pattern: /bg-(white|navy|black)\/\d+/,
+			variants: ['dark'],
+		},
+		{
+			pattern: /border-(white|navy)\/\d+/,
+			variants: ['dark'],
+		}
+	]
 } satisfies Config;
