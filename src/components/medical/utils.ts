@@ -1,4 +1,3 @@
-
 import { MedicalCaseStatus, TriageCategory } from './types';
 
 export const getStatusColor = (status: MedicalCaseStatus) => {
@@ -62,6 +61,11 @@ export const getTriageLabel = (triage: TriageCategory) => {
 };
 
 export const formatTime = (timestamp: string) => {
+  const date = new Date(timestamp);
+  return `${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+};
+
+export const formatTimestamp = (timestamp: string) => {
   const date = new Date(timestamp);
   return `${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
 };
