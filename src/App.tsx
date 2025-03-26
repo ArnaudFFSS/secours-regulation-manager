@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,7 +9,6 @@ import { AuthProvider, useAuth } from "@/context/AuthContext";
 import { AnimatePresence } from "framer-motion";
 
 // Pages
-import Index from "./pages/Index";
 import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
 import MapPage from "./pages/MapPage";
@@ -65,8 +65,10 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
+            {/* Redirect root to login */}
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            
             {/* Public routes */}
-            <Route path="/" element={<Index />} />
             <Route path="/login" element={<LoginPage />} />
             
             {/* Protected routes */}
